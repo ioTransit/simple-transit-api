@@ -1,3 +1,0 @@
-package providers
-
-func Gmv() {}
