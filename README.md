@@ -16,12 +16,7 @@ var StLouisConfig = model.AgencyConfig{
 }
 ```
 ### On Start
-When the server is first started it will load all of the gtfs files that are in the listed in the `providers/all.go` file. Once those are loaded they are stored with their id's as unique identifiers in memory and accessible via the rest api
-
-
-	// Start of Routes
-
-	// Start of Trips
+When the server is first started it will load all of the gtfs files that are in the listed in the `providers/all.go` file. Once those are loaded they are stored with their id's as unique identifiers in memory and accessible via the rest api.
 
 ### On Update 
 In order to keep your data up to date you will need to set the `UPDATE_INTERVAL` with a [cron string](https://crontab.guru/). Once you have that setup this will allow for your gtfs to be updated on a regular interval.
