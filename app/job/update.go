@@ -1,10 +1,22 @@
 package jobs
 
-import "github.com/robfig/cron/v3"
+import (
+	"fmt"
+	"os"
 
-func updateGtfs() {
+	"github.com/robfig/cron/v3"
+)
+
+func UpdateGtfs() *cron.Cron {
+	updateInterval := os.Getenv("UPDATE_INTERVAL")
+	fmt.Printf("interval %s", updateInterval)
+	if updateInterval == "" {
+		return nil
+	}
 	c := cron.New()
-	c.AddFunc("0 3 * * *", func() {
+	c.AddFunc(updateInterval, func() {
 		Load()
 	})
+	c.Start()
+	return c
 }

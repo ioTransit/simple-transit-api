@@ -16,6 +16,7 @@ func main() {
 	}
 
 	jobs.Load()
+	c := jobs.UpdateGtfs()
 
 	e := echo.New()
 	e.GET("/", func(c echo.Context) error {
@@ -34,5 +35,6 @@ func main() {
 	e.GET("/trips/:agencyId/:tripId/", view.GetTripByAgencyAndTripId)
 	e.GET("/trips/:agencyId/route/:routeId/", view.GetTripsByAgencyAndRouteId)
 
-	e.Start(":1080")
+	e.Logger.Fatal(e.Start(":1080"))
+	c.Stop()
 }
