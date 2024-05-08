@@ -59,27 +59,6 @@ type AgencyRow struct {
 	AgencyId   string
 }
 
-func calendar_dates(agencyConfig model.AgencyConfig) {
-}
-
-func routes(agencyConfig model.AgencyConfig) {}
-
-func shapes(agencyConfig model.AgencyConfig) {}
-
-func trips(agencyConfig model.AgencyConfig) {}
-
-func stop_times(agencyConfig model.AgencyConfig) {}
-
-func arrival_times(agencyConfig model.AgencyConfig) {}
-
-func departure_times(agencyConfig model.AgencyConfig) {}
-
-func end_time(agencyConfig model.AgencyConfig) {}
-
-func stops(agencyConfig model.AgencyConfig) {}
-
-func transfers(agencyConfig model.AgencyConfig) {}
-
 func initFeed(agencyConfig model.AgencyConfig) *gtfsparser.Feed {
 	file := fmt.Sprintf("gtfs/%s.zip", agencyConfig.Id)
 	Args := os.Args[1:]
