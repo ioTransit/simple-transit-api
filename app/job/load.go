@@ -6,7 +6,6 @@ import (
 	"go-gtfs-server/app/model"
 	"go-gtfs-server/db"
 	"go-gtfs-server/providers"
-	"go-gtfs-server/utils"
 	"io"
 	"net/http"
 	"os"
@@ -59,10 +58,8 @@ type AgencyRow struct {
 	AgencyId   string
 }
 
-func initFeed(agencyConfig model.AgencyConfig) *gtfsparser.Feed {
+func initFeed(update bool, agencyConfig model.AgencyConfig) *gtfsparser.Feed {
 	file := fmt.Sprintf("gtfs/%s.zip", agencyConfig.Id)
-	Args := os.Args[1:]
-	update := utils.ContainsString(Args, "--update")
 	if update {
 		downloadFile(agencyConfig.Url, file)
 		fmt.Printf("Downloaded %s gtfs", agencyConfig.Name)
@@ -78,9 +75,9 @@ func initFeed(agencyConfig model.AgencyConfig) *gtfsparser.Feed {
 	return Feed
 }
 
-func Load() {
+func Load(update bool) {
 	for _, Agency := range providers.ProvidersArray {
-		Feed := initFeed(Agency)
+		Feed := initFeed(update, Agency)
 		db.GtfsStore[Agency.Id] = db.AgencyStore{Gtfs: Feed, Config: Agency}
 	}
 }

@@ -15,6 +15,8 @@ func CliRouter() {
 	update := utils.ContainsString(Args, "--update")
 	if update {
 		fmt.Println("load it")
-		jobs.Load()
+		Args := os.Args[1:]
+		update := utils.ContainsString(Args, "--update")
+		jobs.Load(update)
 	}
 }

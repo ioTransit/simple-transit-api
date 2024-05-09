@@ -3,6 +3,7 @@ package main
 import (
 	jobs "go-gtfs-server/app/job"
 	"go-gtfs-server/app/view"
+	"go-gtfs-server/cli"
 	"net/http"
 
 	"github.com/joho/godotenv"
@@ -15,7 +16,7 @@ func main() {
 		panic("Error with .env")
 	}
 
-	jobs.Load()
+	cli.CliRouter()
 	c := jobs.UpdateGtfs()
 
 	e := echo.New()
