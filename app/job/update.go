@@ -15,7 +15,7 @@ func UpdateGtfs() *cron.Cron {
 	}
 	c := cron.New()
 	c.AddFunc(updateInterval, func() {
-		Load()
+		Load(true)
 	})
 	c.Start()
 	return c
