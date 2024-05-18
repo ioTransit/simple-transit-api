@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "tailwind": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/output.css --watch",
-    "dev": "concurrently \"make tailwind-watch\" \"air\" \"make templ-watch\"",
+    "build": "tsc",
+    "dev": "concurrently \"tsc\" \"make tailwind-watch\" \"air\" \"make templ-watch\"",
     "kill-server": "kill -15 $(lsof -ti:1080)"
   },
   "devDependencies": {
+    "typescript": "^5.2.2",
     "vite": "^5.2.0"
   },
   "dependencies": {

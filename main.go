@@ -27,7 +27,7 @@ func main() {
 	c := jobs.UpdateGtfs()
 
 	e := echo.New()
-	e.Static("/scripts", "scripts")
+	e.Static("/js", "js")
 	e.Static("/styles", "styles")
 
 	e.GET("/", helloRender)
