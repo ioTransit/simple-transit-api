@@ -1,0 +1,18 @@
+{
+  "name": "go-gtfs-server",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "tailwind": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/output.css --watch",
+    "dev": "concurrently \"make tailwind-watch\" \"air\" \"make templ-watch\"",
+    "kill-server": "kill -15 $(lsof -ti:1080)"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "tailwindcss": "^3.4.3"
+  }
+}

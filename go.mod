@@ -4,6 +4,9 @@ go 1.22.1
 
 require (
 	dario.cat/mergo v1.0.0 // indirect
+	github.com/a-h/templ v0.2.680 // indirect
+	github.com/artonge/go-csv-tag/v2 v2.2.0 // indirect
+	github.com/artonge/go-gtfs v1.3.4 // indirect
 	github.com/bep/godartsass v1.2.0 // indirect
 	github.com/bep/godartsass/v2 v2.0.0 // indirect
 	github.com/bep/golibsass v1.1.1 // indirect
