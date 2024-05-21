@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
+	jobs "go-gtfs-server/app/job"
+	"go-gtfs-server/app/pages"
+	"go-gtfs-server/app/view"
 	"go-gtfs-server/cli"
-	jobs "go-gtfs-server/job"
-	"go-gtfs-server/pages"
-	"go-gtfs-server/view"
 	"log"
 	"net/http"
 	"os"
