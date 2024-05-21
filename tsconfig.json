@@ -13,19 +13,15 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "outDir": "./dist",
     "noEmit": false,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "./js", // Output directory for the compiled JavaScript files
-    "rootDir": "./scripts", // Root directory of your TypeScript source files
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "scripts/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ] // Exclude the node_modules directory and HTML files
+    "./pages"
+  ]
 }

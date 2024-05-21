@@ -1,20 +1,29 @@
 {
   "name": "go-gtfs-server",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
+  "keywords": [],
   "scripts": {
-    "tailwind": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/output.css --watch",
-    "build": "tsc",
-    "dev": "concurrently \"tsc\" \"make tailwind-watch\" \"air\" \"make templ-watch\"",
-    "kill-server": "kill -15 $(lsof -ti:1080)"
+    "tailwind": "npx tailwindcss -i ./styles/custom.css -o ./styles/main.css",
+    "tailwind-watch": "npx tailwindcss -i ./styles/custom.css -o ./styles/main.css --watch",
+    "build": "vite build",
+    "dev": "concurrently \"vite build --watch\" \"pnpm tailwind-watch\" \"air\" \"make templ-watch\"",
+    "kill": "kill -15 $(lsof -ti:1080)"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
+    "daisyui": "^4.11.1",
+    "prettier": "^3.2.5",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "alpinejs": "^3.13.10",
     "concurrently": "^8.2.2",
-    "tailwindcss": "^3.4.3"
+    "filepond": "^4.31.1",
+    "htmx.org": "^1.9.12",
+    "lucide": "^0.378.0",
+    "tailwindcss": "^3.4.3",
+    "vite-tsconfig-paths": "^4.3.2"
   }
 }

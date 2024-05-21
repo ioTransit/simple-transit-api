@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	jobs "go-gtfs-server/app/job"
-	"go-gtfs-server/app/pages"
-	"go-gtfs-server/app/view"
+	"fmt"
 	"go-gtfs-server/cli"
+	jobs "go-gtfs-server/job"
+	"go-gtfs-server/pages"
+	"go-gtfs-server/view"
 	"log"
 	"net/http"
 	"os"
@@ -15,6 +16,7 @@ import (
 	"github.com/a-h/templ"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
@@ -24,13 +26,28 @@ func main() {
 	}
 
 	cli.CliRouter()
-	c := jobs.UpdateGtfs()
+	cron := jobs.UpdateGtfs()
 
 	e := echo.New()
-	e.Static("/js", "js")
-	e.Static("/styles", "styles")
 
-	e.GET("/", helloRender)
+	// setup static file dirs
+	e.Static("/styles", "styles")
+	e.Static("/dist", "dist")
+	e.Static("/images", "images")
+	e.Static("/node_modules", "node_modules")
+
+	e.GET("/scripts/dist/*", func(c echo.Context) error {
+		filePath := "scripts/dist/" + c.Param("*")
+		return c.File(filePath)
+	})
+
+	// Middleware
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	e.GET("/", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, "Welcome to the gtfs server")
+	})
 
 	// Start of Stops
 	e.GET("/api/stops/:agencyId/", view.GetStopsByAgency)
@@ -45,9 +62,12 @@ func main() {
 	e.GET("/api/trips/:agencyId/:tripId/", view.GetTripByAgencyAndTripId)
 	e.GET("/api/trips/:agencyId/route/:routeId/", view.GetTripsByAgencyAndRouteId)
 
+	e.GET("/dashboard/", helloRender)
+
 	// Start server in a goroutine
 	go func() {
 		if err := e.Start(":1080"); err != nil && err != http.ErrServerClosed {
+			fmt.Println(err)
 			e.Logger.Fatal("shutting down the server")
 		}
 	}()
@@ -66,7 +86,7 @@ func main() {
 		e.Logger.Fatal(err)
 	}
 
-	c.Stop()
+	cron.Stop()
 }
 
 func Render(ctx echo.Context, statusCode int, t templ.Component) error {
